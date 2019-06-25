@@ -9,6 +9,7 @@
 .ruby-gemset
 *.log
 yarn.lock
+package-lock.json
 
 # jekyll
 Gemfile.lock
