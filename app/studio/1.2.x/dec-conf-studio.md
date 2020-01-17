@@ -21,11 +21,11 @@ Now that you’re familiar with the value that DB-less mode and declarative conf
 
 Start by importing or starting a new specification in Kong Studio. Copy the specification you’d like to convert to declarative config to your clipboard. If you don’t have a specification on hand, you can test it out using the [Petstore specification](https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.yaml).
 
-1. Click on the **Workspace Dropdown** menu and select **Create Workspace**
+1. Click on the **Workspace Dropdown** menu and select **Create Workspace**.
 
     ![Declarative config](https://doc-assets.konghq.com/studio/1.2/ws-dropdown.png)
 
-1. Name the Workspace and click **Create**
+1. Name the Workspace and click **Create**.
 
     ![Create workspace](https://doc-assets.konghq.com/studio/1.2/ws-dropdown.png)
 
