@@ -1,6 +1,5 @@
 ---
 title: CLI Reference
-skip_read_time: true
 ---
 
 ## Introduction
@@ -19,7 +18,7 @@ All commands take a set of special, optional flags as arguments:
 * `--v`: enable verbose mode
 * `--vv`: enable debug mode (noisy)
 
-[Back to top](#introduction)
+[Back to TOC](#table-of-contents)
 
 ## Available commands
 
@@ -35,10 +34,9 @@ Check the validity of a given Kong configuration file.
 
 ```
 
-[Back to top](#introduction)
+[Back to TOC](#table-of-contents)
 
 ---
-
 
 
 ### kong config
@@ -49,13 +47,18 @@ Usage: kong config COMMAND [OPTIONS]
 Use declarative configuration files with Kong.
 
 The available commands are:
-  init                                Generate an example config file to
-                                      get you started.
+  init [<file>]                       Generate an example config file to
+                                      get you started. If a filename
+                                      is not given, ./kong.yml is used
+                                      by default.
 
   db_import <file>                    Import a declarative config file into
-                                      the Kong database. db_import supports
-                                      most Admin API entities except for Admins,
-                                      RBAC users, roles, and permissions.
+                                      the Kong database.
+
+  db_export [<file>]                  Export the Kong database into a
+                                      declarative config file. If a filename
+                                      is not given, ./kong.yml is used
+                                      by default.
 
   parse <file>                        Parse a declarative config file (check
                                       its syntax) but do not load it into Kong.
@@ -66,9 +69,7 @@ Options:
 
 ```
 
-*Note:* `db_export` is not currently supported in Kong Enterprise.
-
-[Back to top](#introduction)
+[Back to TOC](#table-of-contents)
 
 ---
 
@@ -85,7 +86,32 @@ Options:
 
 ```
 
-[Back to top](#introduction)
+[Back to TOC](#table-of-contents)
+
+---
+
+
+### kong hybrid
+
+```
+Usage: kong hybrid COMMAND [OPTIONS]
+
+Hybrid mode utilities for Kong.
+
+The available commands are:
+  gen_cert [<cert> <key>]           Generate a certificate/key pair that is suitable
+                                    for use in hybrid mode deployment.
+                                    Cert and key will be written to
+                                    './cluster.crt' and './cluster.key' inside
+                                    the current directory unless filenames are given.
+
+Options:
+ -d,--days        (optional number) Override certificate validity duration.
+                                    Default: 1095 days (3 years)
+
+```
+
+[Back to TOC](#table-of-contents)
 
 ---
 
@@ -110,11 +136,11 @@ The available commands are:
 
   reset                             Reset the database.
 
-  migrate-apis                      Migrates API entities to Routes and
-                                    Services.
-
-  migrate-community-to-enterprise   Migrates Kong Community entities to Kong Enterprise in the default
+  migrate-community-to-enterprise   Migrates CE entities to EE on the default
                                     workspace
+
+  reinitialize-workspace-entity-counters  Resets the entity counters from the
+                                          database entities.
 
 Options:
  -y,--yes                           Assume "yes" to prompts and run
@@ -124,6 +150,9 @@ Options:
 
  -f,--force                         Run migrations even if database reports
                                     as already executed.
+
+                                    With 'migrate-community-to-enterprise' it
+                                    disables the workspace entities check.
 
  --db-timeout     (default 60)      Timeout, in seconds, for all database
                                     operations (including schema consensus for
@@ -138,7 +167,7 @@ Options:
 
 ```
 
-[Back to top](#introduction)
+[Back to TOC](#table-of-contents)
 
 ---
 
@@ -166,7 +195,7 @@ Options:
 
 ```
 
-[Back to top](#introduction)
+[Back to TOC](#table-of-contents)
 
 ---
 
@@ -191,7 +220,7 @@ Options:
 
 ```
 
-[Back to top](#introduction)
+[Back to TOC](#table-of-contents)
 
 ---
 
@@ -216,7 +245,7 @@ Options:
 
 ```
 
-[Back to top](#introduction)
+[Back to TOC](#table-of-contents)
 
 ---
 
@@ -242,25 +271,25 @@ Options:
 
 ```
 
-[Back to top](#introduction)
+[Back to TOC](#table-of-contents)
 
 ---
+
 
 ### kong runner
 
 ```
-Usage: kong runner [file] [args]
+Usage: kong runner file.lua [args]
 
-Execute a lua file in a kong node. the `kong` variable is available to
+Execute a lua file in a kong node. The `kong` variable is available to
 reach the DAO, PDK, etc. The variable `args` can be used to access all
 arguments (args[1] being the lua filename bein run).
 
-Example usage:
-  kong runner file.lua arg1 arg2
-  echo 'print("foo")' | kong runner
-
 ```
-[Back to top](#introduction)
+
+[Back to TOC](#table-of-contents)
+
+---
 
 
 ### kong start
@@ -290,7 +319,7 @@ Options:
 
 ```
 
-[Back to top](#introduction)
+[Back to TOC](#table-of-contents)
 
 ---
 
@@ -310,7 +339,7 @@ Options:
 
 ```
 
-[Back to top](#introduction)
+[Back to TOC](#table-of-contents)
 
 ---
 
@@ -328,7 +357,7 @@ Options:
 
 ```
 
-[Back to top](#introduction)
+[Back to TOC](#table-of-contents)
 
 ---
 
