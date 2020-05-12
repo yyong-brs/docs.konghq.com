@@ -157,6 +157,7 @@ for _, section in ipairs(parsed) do
   write("### " .. titleize(section.name) .. " section")
   write("")
   if #section.description > 0 then
+  if section.description and #section.description > 0 then
     write(format_description(section.description))
     write("")
     write("---")
