@@ -31,7 +31,7 @@ Returns the HTTP status code of the response from the Service as a Lua number.
 kong.log.inspect(kong.service.response.get_status()) -- 418
 ```
 
-[Back to top](#kongserviceresponse)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.service.response.get_headers([max_headers])
@@ -83,7 +83,7 @@ if headers then
 end
 ```
 
-[Back to top](#kongserviceresponse)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.service.response.get_header(name)
@@ -128,4 +128,61 @@ kong.log.inspect(kong.service.response.get_header("x-custom-header")) -- "bla"
 kong.log.inspect(kong.service.response.get_header("X-Another"))       -- "foo bar"
 ```
 
-[Back to top](#kongserviceresponse)
+[Back to TOC](#table-of-contents)
+
+
+### kong.service.response.get_raw_body()
+
+Returns the raw buffered body.
+
+**Phases**
+
+* `header_filter`, `body_filter`, `log`
+
+**Returns**
+
+* `string` body The raw buffered body
+
+
+**Usage**
+
+``` lua
+-- Plugin needs to call kong.service.request.enable_buffering() on `rewrite`
+-- or `access` phase prior calling this function.
+
+local body = kong.service.response.get_raw_body()
+```
+
+[Back to TOC](#table-of-contents)
+
+
+### kong.service.response.get_body(mimetype[, mimetype[, max_args]])
+
+Returns the decoded buffered body.
+
+**Phases**
+
+* `header_filter`, `body_filter`, `log`
+
+**Parameters**
+
+* **mimetype** (string, _optional_):  the MIME type
+* **mimetype** (string, _optional_):  the MIME type
+* **max_args** (number, _optional_):  set a limit on the maximum number of parsed
+
+**Returns**
+
+* `string` body The raw buffered body
+
+
+**Usage**
+
+``` lua
+-- Plugin needs to call kong.service.request.enable_buffering() on `rewrite`
+-- or `access` phase prior calling this function.
+
+local body = kong.service.response.get_body()
+```
+
+[Back to TOC](#table-of-contents)
+

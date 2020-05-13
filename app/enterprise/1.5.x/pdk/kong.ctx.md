@@ -54,7 +54,7 @@ function plugin_b_handler:access(conf)
 end
 ```
 
-[Back to top](#kongctx)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.ctx.plugin
@@ -102,4 +102,5 @@ function plugin_handler:log(conf)
 end
 ```
 
-[Back to top](#kongctx)
+[Back to TOC](#table-of-contents)
+

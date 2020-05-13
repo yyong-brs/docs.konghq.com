@@ -10,6 +10,29 @@ Manipulation of the request to the Service
 
 
 
+### kong.service.request.enable_buffering()
+
+Enables buffered proxying that allows plugins to access service body and
+ response headers at the same time
+
+**Phases**
+
+* `rewrite`, `access`
+
+**Returns**
+
+*  Nothing
+
+
+**Usage**
+
+``` lua
+kong.service.request.enable_buffering()
+```
+
+[Back to TOC](#table-of-contents)
+
+
 ### kong.service.request.set_scheme(scheme)
 
 Sets the protocol to use when proxying the request to the Service.
@@ -33,7 +56,7 @@ Sets the protocol to use when proxying the request to the Service.
 kong.service.request.set_scheme("https")
 ```
 
-[Back to top](#kongservicerequest)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.service.request.set_path(path)
@@ -60,7 +83,7 @@ Sets the path component for the request to the service.  It is not
 kong.service.request.set_path("/v2/movies")
 ```
 
-[Back to top](#kongservicerequest)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.service.request.set_raw_query(query)
@@ -91,7 +114,7 @@ Sets the querystring of the request to the Service.  The `query` argument is a
 kong.service.request.set_raw_query("zzz&bar=baz&bar=bla&bar&blo=&foo=hello%20world")
 ```
 
-[Back to top](#kongservicerequest)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.service.request.set_method(method)
@@ -120,7 +143,7 @@ Sets the HTTP method for the request to the service.
 kong.service.request.set_method("DELETE")
 ```
 
-[Back to top](#kongservicerequest)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.service.request.set_query(args)
@@ -168,7 +191,7 @@ kong.service.request.set_query({
 -- bar=baz&bar=bla&bar&blo=&foo=hello%20world&zzz
 ```
 
-[Back to top](#kongservicerequest)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.service.request.set_header(header, value)
@@ -200,7 +223,7 @@ Sets a header in the request to the Service with the given value.  Any existing 
 kong.service.request.set_header("X-Foo", "value")
 ```
 
-[Back to top](#kongservicerequest)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.service.request.add_header(header, value)
@@ -232,7 +255,7 @@ kong.service.request.add_header("Cache-Control", "no-cache")
 kong.service.request.add_header("Cache-Control", "no-store")
 ```
 
-[Back to top](#kongservicerequest)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.service.request.clear_header(header)
@@ -262,7 +285,7 @@ kong.service.request.clear_header("X-Foo")
 -- from here onwards, no X-Foo headers will exist in the request
 ```
 
-[Back to top](#kongservicerequest)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.service.request.set_headers(headers)
@@ -315,7 +338,7 @@ kong.service.request.set_headers({
 -- X-Foo: foo3
 ```
 
-[Back to top](#kongservicerequest)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.service.request.set_raw_body(body)
@@ -348,7 +371,7 @@ Sets the body of the request to the Service.
 kong.service.request.set_raw_body("Hello, world!")
 ```
 
-[Back to top](#kongservicerequest)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.service.request.set_body(args[, mimetype])
@@ -433,4 +456,37 @@ local ok, err = kong.service.request.set_body({
 -- bar=baz&bar=bla&bar&blo=&foo=hello%20world&zzz
 ```
 
-[Back to top](#kongservicerequest)
+[Back to TOC](#table-of-contents)
+
+
+### kong.service.request.disable_tls()
+
+Disables the TLS handshake to upstream for [ngx\_stream\_proxy\_module](https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html).
+ Effectively this overrides [proxy\_ssl](https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_ssl) directive to `off` setting
+ for the current stream session.
+
+ Note that once this function has been called it is not possible to re-enable TLS handshake for the current session.
+
+
+**Phases**
+
+* `preread`, `balancer`
+
+**Returns**
+
+1.  `boolean|nil` `true` if the operation succeeded, `nil` if an error occurred
+
+1.  `string|nil` An error message describing the error if there was one.
+
+
+**Usage**
+
+``` lua
+local ok, err = kong.service.request.disable_tls()
+if not ok then
+  -- do something with error
+end
+```
+
+[Back to TOC](#table-of-contents)
+

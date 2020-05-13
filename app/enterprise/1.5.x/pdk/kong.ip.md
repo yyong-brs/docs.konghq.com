@@ -47,4 +47,5 @@ if kong.ip.is_trusted("1.1.1.1") then
 end
 ```
 
-[Back to top](#kongip)
+[Back to TOC](#table-of-contents)
+

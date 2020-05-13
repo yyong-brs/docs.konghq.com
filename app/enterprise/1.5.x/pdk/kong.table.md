@@ -33,7 +33,7 @@ Returns a table with pre-allocated number of slots in its array and hash
 local tab = kong.table.new(4, 4)
 ```
 
-[Back to top](#kongtable)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.table.clear(tab)
@@ -63,4 +63,5 @@ kong.log(tab[1]) -- nil
 kong.log(tab.foo) -- nil
 ```
 
-[Back to top](#kongtable)
+[Back to TOC](#table-of-contents)
+

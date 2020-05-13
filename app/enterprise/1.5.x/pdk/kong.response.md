@@ -49,7 +49,7 @@ Returns the HTTP status code currently set for the downstream response (as
 kong.response.get_status() -- 200
 ```
 
-[Back to top](#kongresponse)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.response.get_header(name)
@@ -98,7 +98,7 @@ kong.response.get_header("X-Another")       -- "foo bar"
 kong.response.get_header("X-None")          -- nil
 ```
 
-[Back to top](#kongresponse)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.response.get_headers([max_headers])
@@ -157,7 +157,7 @@ headers.x_another[1]    -- "foo bar"
 headers["X-Another"][2] -- "baz"
 ```
 
-[Back to top](#kongresponse)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.response.get_source()
@@ -201,7 +201,7 @@ elseif kong.response.get_source() == "exit" then
 end
 ```
 
-[Back to top](#kongresponse)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.response.set_status(status)
@@ -232,7 +232,7 @@ Allows changing the downstream response HTTP status code before sending it
 kong.response.set_status(404)
 ```
 
-[Back to top](#kongresponse)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.response.set_header(name, value)
@@ -263,7 +263,7 @@ Sets a response header with the given value.  This function overrides any
 kong.response.set_header("X-Foo", "value")
 ```
 
-[Back to top](#kongresponse)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.response.add_header(name, value)
@@ -299,7 +299,7 @@ kong.response.add_header("Cache-Control", "no-cache")
 kong.response.add_header("Cache-Control", "no-store")
 ```
 
-[Back to top](#kongresponse)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.response.clear_header(name)
@@ -334,7 +334,7 @@ kong.response.clear_header("X-Foo")
 -- from here onwards, no X-Foo headers will exist in the response
 ```
 
-[Back to top](#kongresponse)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.response.set_headers(headers)
@@ -385,7 +385,7 @@ kong.response.set_headers({
 -- X-Foo: foo3
 ```
 
-[Back to top](#kongresponse)
+[Back to TOC](#table-of-contents)
 
 
 ### kong.response.exit(status[, body[, headers]])
@@ -419,7 +419,12 @@ This function interrupts the current processing and produces a response.
  as-is.  It is the caller's responsibility to set the appropriate
  Content-Type header via the third argument.  As a convenience, `body` can
  be specified as a table; in which case, it will be JSON-encoded and the
- `application/json` Content-Type header will be set.
+ `application/json` Content-Type header will be set. On gRPC we cannot send
+ the `body` with this function at the moment at least, so what it does
+ instead is that it sends "body" in `grpc-message` header instead. If the
+ body is a table it looks for a field `message` in it, and uses that as a
+ `grpc-message` header. Though, if you have specified `Content-Type` header
+ starting with `application/grpc`, the body will be sent.
 
  The third, optional, `headers` argument can be a table specifying response
  headers to send. If specified, its behavior is similar to
@@ -465,4 +470,5 @@ return kong.response.exit(403, { message = "Access Forbidden" }, {
 })
 ```
 
-[Back to top](#kongresponse)
+[Back to TOC](#table-of-contents)
+
